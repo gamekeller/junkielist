@@ -1,0 +1,138 @@
+<!--           -->
+<!-- LOGGED IN -->
+<!--           -->
+<template name="_loginButtonsLoggedInDropdown">
+  <li id="login-dropdown-list" class="dropdown">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+      {{displayName}}
+      <b class="caret"></b>
+    </a>
+    <div class="dropdown-menu pull-right col-sm-3">
+      {{#if inMessageOnlyFlow}}
+        {{> _loginButtonsMessages}}
+      {{else}}
+        {{#if inChangePasswordFlow}}
+          {{> _loginButtonsChangePassword}}
+        {{else}}
+          {{> _loginButtonsLoggedInDropdownActions}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </li>
+</template>
+
+<template name="_loginButtonsLoggedInDropdownActions">
+  {{#if allowChangingPassword}}
+    <button class="btn btn-default btn-block" id="login-buttons-open-change-password">Passwort ändern</button>
+  {{/if}}
+  <button class="btn btn-block btn-primary" id="login-buttons-logout">Abmelden</button>
+</template>
+
+<!--            -->
+<!-- LOGGED OUT -->
+<!--            -->
+<template name="_loginButtonsLoggedOutDropdown">
+  <li id="login-dropdown-list" class="dropdown">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+      Anmelden / Registrieren
+      <b class="caret"></b>
+    </a>
+    <div class="dropdown-menu pull-right">
+      {{> _loginButtonsLoggedOutAllServices}}
+    </div>
+  </li>
+</template>
+
+<template name="_loginButtonsLoggedOutAllServices">
+  {{#each services}}
+  {{#unless hasPasswordService}}
+    {{> _loginButtonsMessages}}
+  {{/unless}}
+    {{#if isPasswordService}}
+      {{#if hasOtherServices}} {{! the password service will always come last }}
+        {{> _loginButtonsLoggedOutPasswordServiceSeparator}}
+      {{/if}}
+      {{> _loginButtonsLoggedOutPasswordService}}
+    {{else}}
+      {{> _loginButtonsLoggedOutSingleLoginButton}}
+    {{/if}}
+  {{/each}}
+</template>
+
+<template name="_loginButtonsLoggedOutPasswordServiceSeparator">
+  <div class="or">
+    <span class="or-text">Oder</span>
+  </div>
+</template>
+
+<template name="_loginButtonsLoggedOutPasswordService">
+  {{#if inForgotPasswordFlow}}
+    {{> _forgotPasswordForm}}
+  {{else}}
+    {{> _loginButtonsMessages}}
+    <div class="login inputs clearfix">
+      {{#each fields}}
+        {{#if visible}}
+          {{> _loginButtonsFormField}}
+        {{/if}}
+      {{/each}}
+    </div>
+
+    {{#if inSignupFlow}}
+      <div class="btn-group-fill">
+        <div class="btn-wrap">{{> _loginButtonsBackToLoginLink}}</div>
+        <div class="btn-wrap"><a class="btn btn-primary" id="login-buttons-password">Registrieren</a></div>
+      </div>
+    {{else}}
+      <button class="btn btn-primary btn-block" id="login-buttons-password" type="button">Anmelden</button>
+    {{/if}}
+
+    {{#if inLoginFlow}}
+      <div id="login-other-options" class="clearfix">
+      {{#if showForgotPasswordLink}}
+        <a id="forgot-password-link" class="pull-left" href="#">Passwort vergessen?</a>
+      {{/if}}
+        <a id="signup-link" class="pull-right" href="#">Account erstellen</a>
+      </div>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="_forgotPasswordForm">
+  <div class="login-form">
+    {{> _loginButtonsMessages}}
+    <div id="forgot-password-email-label-and-input" class="inputs"> {{! XXX we should probably use loginButtonsFormField }}
+      <input id="forgot-password-email" type="email" placeholder="E-Mail-Adresse" class="form-control">
+    </div>
+
+    <div class="btn-group-fill">
+      <div class="btn-wrap">{{> _loginButtonsBackToLoginLink}}</div>
+      <div class="btn-wrap"><a class="btn btn-primary login-button-form-submit" id="login-buttons-forgot-password">Password zurücksetzen</a></div>
+    </div>
+  </div>
+</template>
+
+<template name="_loginButtonsBackToLoginLink">
+    <a id="back-to-login-link" class="btn btn-default">Abbrechen</a>
+</template>
+
+<template name="_loginButtonsFormField">
+  {{#if visible}}
+    <input id="login-{{fieldName}}" type="{{inputType}}" placeholder="{{fieldLabel}}" class="form-control">
+  {{/if}}
+</template>
+
+<template name="_loginButtonsChangePassword">
+  {{> _loginButtonsMessages}}
+
+  <div class="inputs inputs-connected">
+    {{#each fields}}
+      {{> _loginButtonsFormField}}
+    {{/each}}
+  </div>
+
+  <div class="btn-group-fill">
+    <div class="btn-wrap"><button class="btn btn-default login-close">Schließen</button></div>
+    <div class="btn-wrap"><button class="btn btn-primary" id="login-buttons-do-change-password">Passwort ändern</button></div>
+  </div>
+</template>

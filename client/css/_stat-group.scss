@@ -1,0 +1,36 @@
+.stat-group {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: table;
+  table-layout: fixed;
+}
+
+.stat {
+  display: table-cell;
+  padding: 0 24px;
+  border-right: 1px solid #eee;
+  text-align: center;
+  position: relative;
+}
+
+.stat:last-child { border-right: none; }
+
+.stat dl {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+}
+
+.stat__title,
+.stat__value { line-height: inherit; }
+
+.stat__title {
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.stat__value {
+  font-size: 2.2em;
+  font-weight: 500;
+}

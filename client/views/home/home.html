@@ -1,0 +1,34 @@
+<template name="home">
+  <div class="page-header">
+    <h1 class="inline">Meine Serien</h1>
+  </div>
+
+  {{#if hasShows}}
+    <ul class="show-list multi-list two-cols clearfix">
+      {{#each shows}}
+        <li class="show-item special-button" data-search="{{searchableName}}">
+          {{> showItem}}
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div class="jumbotron">
+      <h2>Sieht aus, als ob du noch keine Serie trackst!</h2>
+      <p><a href="/shows">Such' dir ein paar Serien aus</a> und beginne mit dem Tracken.</p>
+    </div>
+  {{/if}}
+</template>
+
+<template name="welcome">
+  <div class="jumbotron">
+    <h1>Willkommen bei Junkielist</h1>
+    <p>Bitte melde dich an, um zu starten</p>
+  </div>
+</template>
+
+<template name="requireVerification">
+  <div class="jumbotron">
+    <h1>Junkielist ist in der private Alpha</h1>
+    <p>Ein Administrator wurde kontaktiert und wird dich, sofern du an der private Alpha teilnehmen darfst, freischalten.</p>
+  </div>
+</template>

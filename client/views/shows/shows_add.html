@@ -1,0 +1,108 @@
+<template name="showsAdd">
+  {{#unless support}}
+    <div class="alert alert-danger"><strong>Achtung!</strong> Dein Browser unterstützt die benötigten Technologien dieser Seite nicht. <a href="http://browsehappy.com">Bitte update deine Browser</a>, um diese Seite zu benutzen.</div>
+  {{/unless}}
+
+  <div class="page-header">
+    <h1>Serie zur Bibliothek hinzufügen</h1>
+  </div>
+
+  {{#autoForm schema='Shows' class='form-horizontal' validation='submit'}}
+    <div class="form-group{{#if afFieldIsInvalid 'name'}} has-error{{/if}}">
+      {{afFieldLabel 'name' class='col-md-3' for='name'}}
+      <div class="col-md-9">
+        {{afFieldInput 'name' id='name' placeholder='MacGyver'}}
+
+        {{#if afFieldIsInvalid 'name'}}
+          <span class="help-block">{{afFieldMessage 'name'}}</span>
+        {{/if}}
+      </div>
+    </div>
+    <div class="form-group{{#if afFieldIsInvalid 'picture'}} has-error{{/if}}">
+      {{afFieldLabel 'picture' class='col-md-3' for='pic-upload'}}
+      {{afFieldInput 'picture' id="picture" type='hidden' value='placeholder'}}
+
+      <div class="col-md-9">
+        <div class="file">
+          <label title="Im Idealfall ein 128 Pixel mal 128 Pixel großes JPG-Bild. Wenn du kein Bild hochlädst, wird ein Platzhalter verwendet"><input type="file" id="pic-upload"> Ideal: 128 Pixel mal 128 Pixel JPG, Kein Bild hochgeladen = Platzhalter</label>
+        </div>
+
+        {{#if afFieldIsInvalid 'picture'}}
+          <span class="help-block">{{afFieldMessage 'picture'}}</span>
+        {{/if}}
+      </div>
+    </div>
+    <div class="form-group{{#if afFieldIsInvalid 'seasons'}} has-error{{/if}}">
+      {{afFieldLabel 'seasons' class='col-md-3' for='seasons'}}
+      <div class="col-md-9">
+        {{afFieldInput 'seasons' id='seasons' placeholder='7' min='1'}}
+
+        {{#if afFieldIsInvalid 'seasons'}}
+          <span class="help-block">{{afFieldMessage 'seasons'}}</span>
+        {{/if}}
+      </div>
+    </div>
+    <div class="form-group{{#if afFieldIsInvalid 'episodesInSeasons'}} has-error{{/if}}">
+      {{afFieldLabel 'episodesInSeasons' class='col-md-3'}}
+      {{afFieldInput 'episodesInSeasons' id="episodes-in-seasons-hidden" type='hidden'}}
+
+      <div class="col-md-9">
+        <ul id="episodes-in-seasons-list" class="multi-list four-cols clearfix">
+          <li>
+            <div class="input-group">
+              <span class="input-group-addon">Staffel 1</span>
+              <input type="number" class="form-control" disabled title="Füll' bitte zuerst die Anzahl an Staffeln aus" placeholder="22">
+            </div>
+          </li>
+          <li>
+            <div class="input-group">
+              <span class="input-group-addon">Staffel 2</span>
+              <input type="number" class="form-control" disabled title="Füll' bitte zuerst die Anzahl an Staffeln aus" placeholder="22">
+            </div>
+          </li>
+          <li>
+            <div class="input-group">
+              <span class="input-group-addon">Staffel 3</span>
+              <input type="number" class="form-control" disabled title="Füll' bitte zuerst die Anzahl an Staffeln aus" placeholder="20">
+            </div>
+          </li>
+          <li>
+            <div class="input-group">
+              <span class="input-group-addon">Staffel 4</span>
+              <input type="number" class="form-control" disabled title="Füll' bitte zuerst die Anzahl an Staffeln aus" placeholder="19">
+            </div>
+          </li>
+          <li>
+            <div class="input-group">
+              <span class="input-group-addon">Staffel 5</span>
+              <input type="number" class="form-control" disabled title="Füll' bitte zuerst die Anzahl an Staffeln aus" placeholder="21">
+            </div>
+          </li>
+          <li>
+            <div class="input-group">
+              <span class="input-group-addon">Staffel 6</span>
+              <input type="number" class="form-control" disabled title="Füll' bitte zuerst die Anzahl an Staffeln aus" placeholder="21">
+            </div>
+          </li>
+          <li>
+            <div class="input-group">
+              <span class="input-group-addon">Staffel 7</span>
+              <input type="number" class="form-control" disabled title="Füll' bitte zuerst die Anzahl an Staffeln aus" placeholder="14">
+            </div>
+          </li>
+        </ul>
+        {{#if afFieldIsInvalid 'episodesInSeasons'}}
+          <span class="help-block">{{afFieldMessage 'episodesInSeasons'}}</span>
+        {{/if}}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-3">
+        <a href="/shows" class="btn btn-lg btn-default btn-block">Zurück</a>
+      </div>
+      <div class="col-md-9">
+        <button type="submit" class="btn btn-lg btn-primary btn-block insert">Hinzufügen</button>
+      </div>
+    </div>
+  {{/autoForm}}
+</template>

@@ -1,0 +1,127 @@
+@import "bourbon/bourbon";
+@import "accounts-ui";
+
+.giga { font-size: 96px; }
+.mega { font-size: 72px; }
+.kilo { font-size: 48px; }
+
+.alpha { font-size: 36px; }
+.beta { font-size: 30px; }
+.gamma { font-size: 24px; }
+.delta { font-size: 20px; }
+.epsilon { font-size: 16px; }
+.zeta { font-size: 14px; }
+
+.jumbotron > :first-child { margin-top: 0; }
+.jumbotron > :last-child { margin-bottom: 0; }
+
+.inline {
+  display: inline-block;
+}
+
+html, body { height: 100%; }
+
+.searchbar-spacer { height: 12%; }
+
+.searchbar {
+  display: none;
+  opacity: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 12%;
+  background: rgba(255, 255, 255, .9);
+  @include transition(all .15s);
+
+  &.active { opacity: 1; }
+
+  input {
+    border: none;
+    background: none;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 64px;
+    text-align: center;
+    padding: 0 3%;
+    color: #ccc;
+    @include transition(color .25s);
+
+    &:focus {
+      outline: none;
+      color: #000;
+    }
+  }
+}
+
+body {
+  padding-top: 71px;
+
+  .page-header:first-child { margin-top: 0; }
+}
+
+.page-header {
+  margin-bottom: 48px;
+
+  h1 > .btn {
+    margin-top: 5px;
+  }
+}
+
+label small { font-weight: normal; }
+
+.help-block {
+  margin-top: 10px;
+  margin-bottom: 0;
+
+  &:empty { margin: 0; }
+
+  ul {
+    list-style: outsize;
+    margin: 0;
+    padding: 0 0 0 15px;
+  }
+}
+
+.form-horizontal .file { margin-top: 7px; }
+
+.file {
+
+  input {
+    float: left;
+    font-size: 11px;
+  }
+
+  label {
+    display: block;
+    margin: 0;
+    font-weight: normal;
+    text-align: right;
+  }
+
+  .has-error & { color: #b94a48; }
+  .has-warning & { color: #c09853; }
+  .has-success & { color: #468847; }
+}
+
+.form-group.has-warning,
+.form-group.has-error { margin-bottom: 10px; }
+
+.container > .show-item:first-child { margin-top: 20px; }
+
+.stat select {
+  -webkit-appearance: none;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 24px;
+  border: none;
+  width: 59px;
+  height: 44px;
+  font-size: 31px;
+}
+
+@import "matrix";
+@import "stat-group";
+@import "show";

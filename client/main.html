@@ -1,0 +1,13 @@
+<head>
+  <title>Junkielist</title>
+</head>
+
+<body>
+  {{> header}}
+  <div class="container">
+    {{renderPage}}
+  </div>
+  {{#if showSearchBar}}
+    {{> searchBar}}
+  {{/if}}
+</body>
