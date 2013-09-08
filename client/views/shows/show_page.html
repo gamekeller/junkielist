@@ -3,74 +3,72 @@
     <div class="alert alert-danger"><strong>Achtung!</strong> Dein Browser unterstützt die benötigten Technologien dieser Seite nicht. <a href="http://browsehappy.com">Bitte update deine Browser</a>, um diese Seite zu benutzen.</div>
   {{/unless}}
 
-  {{#with show}}
-    <div class="show-item">
-      {{> showItem}}
+  <div class="show-item">
+    {{> showItem}}
+  </div>
+
+  {{#autoForm schema='Shows' doc=this class='form-horizontal' validation='submit' id='showUpdateForm' onSubmit=onSubmit}}
+    <div class="form-group{{#if afFieldIsInvalid 'name'}} has-error{{/if}}">
+      {{afFieldLabel 'name' class='col-md-3' for='name'}}
+      <div class="col-md-9">
+        {{afFieldInput 'name' id='name' placeholder='MacGyver'}}
+
+        {{#if afFieldIsInvalid 'name'}}
+          <span class="help-block">{{afFieldMessage 'name'}}</span>
+        {{/if}}
+      </div>
     </div>
+    <div class="form-group{{#if afFieldIsInvalid 'picture'}} has-error{{/if}}">
+      {{afFieldLabel 'picture' class='col-md-3' for='pic-upload'}}
+      {{afFieldInput 'picture' id="picture" type='hidden' value='placeholder'}}
 
-    {{#autoForm schema='Shows' doc=this class='form-horizontal' validation='submit' id='showUpdateForm' onSubmit=onSubmit}}
-      <div class="form-group{{#if afFieldIsInvalid 'name'}} has-error{{/if}}">
-        {{afFieldLabel 'name' class='col-md-3' for='name'}}
-        <div class="col-md-9">
-          {{afFieldInput 'name' id='name' placeholder='MacGyver'}}
-
-          {{#if afFieldIsInvalid 'name'}}
-            <span class="help-block">{{afFieldMessage 'name'}}</span>
-          {{/if}}
+      <div class="col-md-9">
+        <div class="file">
+          <label title="Im Idealfall ein 128 Pixel mal 128 Pixel großes JPG-Bild. Wenn du kein Bild hochlädst, wird ein Platzhalter verwendet"><input type="file" id="pic-upload"> Ideal: 128 Pixel mal 128 Pixel JPG, Kein Bild hochgeladen = Platzhalter</label>
         </div>
+
+        {{#if afFieldIsInvalid 'picture'}}
+          <span class="help-block">{{afFieldMessage 'picture'}}</span>
+        {{/if}}
       </div>
-      <div class="form-group{{#if afFieldIsInvalid 'picture'}} has-error{{/if}}">
-        {{afFieldLabel 'picture' class='col-md-3' for='pic-upload'}}
-        {{afFieldInput 'picture' id="picture" type='hidden' value='placeholder'}}
+    </div>
+    <div class="form-group{{#if afFieldIsInvalid 'seasons'}} has-error{{/if}}">
+      {{afFieldLabel 'seasons' class='col-md-3' for='seasons'}}
+      <div class="col-md-9">
+        {{afFieldInput 'seasons' id='seasons' placeholder='7' min='1'}}
 
-        <div class="col-md-9">
-          <div class="file">
-            <label title="Im Idealfall ein 128 Pixel mal 128 Pixel großes JPG-Bild. Wenn du kein Bild hochlädst, wird ein Platzhalter verwendet"><input type="file" id="pic-upload"> Ideal: 128 Pixel mal 128 Pixel JPG, Kein Bild hochgeladen = Platzhalter</label>
-          </div>
+        {{#if afFieldIsInvalid 'seasons'}}
+          <span class="help-block">{{afFieldMessage 'seasons'}}</span>
+        {{/if}}
+      </div>
+    </div>
+    <div class="form-group{{#if afFieldIsInvalid 'episodesInSeasons'}} has-error{{/if}}">
+      {{afFieldLabel 'episodesInSeasons' class='col-md-3'}}
+      {{afFieldInput 'episodesInSeasons' id='episodesInSeasonsField' type='hidden' value='2'}}
 
-          {{#if afFieldIsInvalid 'picture'}}
-            <span class="help-block">{{afFieldMessage 'picture'}}</span>
-          {{/if}}
-        </div>
+      <div class="col-md-9">
+        <ul id="episodes-in-seasons-list" class="multi-list four-cols clearfix">
+          {{#each epsInSeasons episodesInSeasons}}
+            <li>
+              <div class="input-group">
+                <span class="input-group-addon">Staffel {{key}}</span>
+                <input type="number" data-index="{{index}}" class="form-control episodes-in-season" value="{{value}}" required min="1">
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+        {{#if afFieldIsInvalid 'episodesInSeasons'}}
+          <span class="help-block">{{afFieldMessage 'episodesInSeasons'}}</span>
+        {{/if}}
       </div>
-      <div class="form-group{{#if afFieldIsInvalid 'seasons'}} has-error{{/if}}">
-        {{afFieldLabel 'seasons' class='col-md-3' for='seasons'}}
-        <div class="col-md-9">
-          {{afFieldInput 'seasons' id='seasons' placeholder='7' min='1'}}
-
-          {{#if afFieldIsInvalid 'seasons'}}
-            <span class="help-block">{{afFieldMessage 'seasons'}}</span>
-          {{/if}}
-        </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-3">
+        <a href="/shows" class="btn btn-lg btn-default btn-block">Zurück</a>
       </div>
-      <div class="form-group{{#if afFieldIsInvalid 'episodesInSeasons'}} has-error{{/if}}">
-        {{afFieldLabel 'episodesInSeasons' class='col-md-3'}}
-        {{afFieldInput 'episodesInSeasons' id='episodesInSeasonsField' type='hidden' value='2'}}
-
-        <div class="col-md-9">
-          <ul id="episodes-in-seasons-list" class="multi-list four-cols clearfix">
-            {{#each epsInSeasons episodesInSeasons}}
-              <li>
-                <div class="input-group">
-                  <span class="input-group-addon">Staffel {{key}}</span>
-                  <input type="number" data-index="{{index}}" class="form-control episodes-in-season" value="{{value}}" required min="1">
-                </div>
-              </li>
-            {{/each}}
-          </ul>
-          {{#if afFieldIsInvalid 'episodesInSeasons'}}
-            <span class="help-block">{{afFieldMessage 'episodesInSeasons'}}</span>
-          {{/if}}
-        </div>
+      <div class="col-md-9">
+        <button type="submit" class="btn btn-lg btn-primary btn-block update">Aktualisieren</button>
       </div>
-      <div class="form-group">
-        <div class="col-md-3">
-          <a href="/shows" class="btn btn-lg btn-default btn-block">Zurück</a>
-        </div>
-        <div class="col-md-9">
-          <button type="submit" class="btn btn-lg btn-primary btn-block update">Aktualisieren</button>
-        </div>
-      </div>
-    {{/autoForm}}
-  {{/with}}
+    </div>
+  {{/autoForm}}
 </template>

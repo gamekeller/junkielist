@@ -1,7 +1,3 @@
-Template.usersList.users = function() {
-  return Meteor.users.find();
-};
-
 Template.usersList.namail = function() {
   if(this.profile.name) return this.profile.name;
   if(this.emails.length) return this.emails[0].address;
