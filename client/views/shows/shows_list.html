@@ -3,15 +3,11 @@
     <h1>Serien {{#if isAdmin}}<a href="/shows/add" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Bibliothek erweitern</a>{{/if}}</h1>
   </div>
 
-  {{#if loading}}
-    <h2>Laden...</h2>
-  {{else}}
-    <ul class="show-list multi-list two-cols clearfix">
-      {{#each shows}}
-        <li class="show-item" data-search="{{searchableTitle}}">
-          {{> showItem}}
-        </li>
-      {{/each}}
-    </ul>
-  {{/if}}
+  <ul class="show-list multi-list two-cols clearfix">
+    {{#each this}}
+      <li class="show-item" data-search="{{searchableTitle}}">
+        {{> showItem}}
+      </li>
+    {{/each}}
+  </ul>
 </template>

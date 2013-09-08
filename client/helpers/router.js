@@ -1,7 +1,23 @@
+var Subscriptions = {
+  currentUser: Meteor.subscribe('currentUser'),
+  shows: Meteor.subscribe('shows'),
+  allUsers: Meteor.subscribe('allUsers')
+};
+
 Router.configure({
   layout: 'layout',
   notFoundTemplate: 'notFound',
   loadingTemplate: 'loading',
+
+  waitOn: function() {
+    if(Meteor.user() && isAdminById(Meteor.userId())) {
+      return [Subscriptions.shows, Subscriptions.currentUser, Subscriptions.allUsers];
+    } else if(Meteor.user() && Meteor.user().isVerified) {
+      return [Subscriptions.shows, Subscriptions.currentUser];
+    } else {
+      return Subscriptions.currentUser;
+    }
+  },
 
   before: function() {
     var routeName = this.context.route.name;
@@ -21,22 +37,26 @@ Router.configure({
 
 Router.map(function() {
 
-  this.route('home', { path: '/' });
+  this.route('home', {
+    path: '/'
+  });
 
-  this.route('showsList', { path: '/shows' });
+  this.route('showsList', {
+    path: '/shows',
+    data: function() { return Shows.find({}, { sort: { name: 1 } }); }
+  });
 
   this.route('showsAdd', { path: '/shows/add' });
 
   this.route('showPage', {
     path: '/shows/:_id',
-    data: function() { return Shows.findOne(this.params._id); }
-    //, waitOn: [showsSub, currentUserSub]
+    data: function() { return Shows.findOne(this.params._id); },
+    onBeforeRun: function() { Session.set('selectedShowId', this.params._id); }
   });
 
   this.route('usersList', {
     path: '/users',
     data: function() { return Meteor.users.find(); }
-    //, waitOn: allUsersSub
   });
 
   this.route('notFound', { path: '/*' });

@@ -1,16 +1,7 @@
 Template.home.shows = function() {
-  if(!Meteor.user()) {
-    throw new Meteor.Error(401, 'Unauthorized');
-    return false;
-  }
-
   var shows = [];
 
-  _.each(Meteor.user().shows, function(val, key, list) {
-
-    shows.push(_.extend(list[key], Shows.findOne({_id: key})));
-
-  });
+  _.each(Meteor.user().shows, function(val, key, list) { shows.push(_.extend(list[key], Shows.findOne({_id: key}))); });
 
   return shows;
 };
