@@ -1,6 +1,4 @@
 Meteor.startup(function() {
-  Session.set('shows_loaded', false);
-
   // if(Meteor.user() && Session.get('shows_loaded')) {
   //   var userShows = Meteor.user().shows;
 
@@ -26,9 +24,4 @@ Meteor.startup(function() {
   // }
 });
 
-Meteor.subscribe('shows', function() {
-  Session.set('shows_loaded', true);
-});
-
-Meteor.subscribe('currentUser');
-Meteor.subscribe('allUsers');
+Meteor.Spinner.options.top = '20px';

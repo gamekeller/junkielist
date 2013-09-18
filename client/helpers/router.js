@@ -1,59 +1,64 @@
-Meteor.Router.add({
-  '/': { as: 'home', to: function() {
+var Subscriptions = {
+  currentUser: Meteor.subscribe('currentUser'),
+  shows: Meteor.subscribe('shows'),
+  allUsers: Meteor.subscribe('allUsers')
+};
 
-    Session.set('showSearchBar', (Meteor.user() && Meteor.user().isVerified && !_.isEmpty(Meteor.user().shows)) ? true : false);
-    return 'home';
+Router.configure({
+  layout: 'layout',
+  notFoundTemplate: 'notFound',
+  loadingTemplate: 'loading',
 
-  }},
-
-  '/shows': { as: 'shows', to: function() {
-
-    Session.set('showSearchBar', true);
-    return 'showsList';
-
-  }},
-
-  '/shows/add': { as: 'shows', to: function() {
-
-    Session.set('showSearchBar', false);
-    return (isAdminById(Meteor.userId())) ? 'showsAdd' : 'notFound';
-
-  }},
-
-  '/shows/:id': { as: 'shows', to: function(id) {
-
-    Session.set('selectedShowId', id);
-    Session.set('showSearchBar', false);
-
-    return (isAdminById(Meteor.userId()) && Shows.findOne({_id: id})) ? 'showPage' : 'notFound';
-
-  }},
-
-  '/users': { as: 'users', to: function() {
-
-    Session.set('showSearchBar', true);
-    return (isAdminById(Meteor.userId())) ? 'usersList' : 'notFound';
-
-  }},
-
-  '*': 'notFound'
-});
-
-Meteor.Router.filters({
-  requireVerification: function(page) {
-    if(Meteor.loggingIn()) {
-      return 'loading';
-    } else if(Meteor.user()) {
-
-      if(Meteor.user().isVerified) {
-        return page;
-      } else {
-        return 'requireVerification';
-      }
+  waitOn: function() {
+    if(Meteor.user() && isAdminById(Meteor.userId())) {
+      return [Subscriptions.shows, Subscriptions.currentUser, Subscriptions.allUsers];
+    } else if(Meteor.user() && Meteor.user().isVerified) {
+      return [Subscriptions.shows, Subscriptions.currentUser];
     } else {
-      return 'welcome';
+      return Subscriptions.currentUser;
+    }
+  },
+
+  before: function() {
+    var routeName = this.context.route.name;
+
+    if(!Meteor.user()) {
+      this.render(Meteor.loggingIn() ? this.loadingTemplate : 'welcome');
+      return this.stop();
+    } else if(!Meteor.user().isVerified) {
+      this.render(Meteor.loggingIn() ? this.loadingTemplate : 'requireVerification');
+      return this.stop();
+    } else if(_.contains(['usersList', 'showsAdd'], routeName) && !isAdminById(Meteor.userId())) {
+      this.render(Meteor.loggingIn() ? this.loadingTemplate : 'notFound');
+      return this.stop();
     }
   }
 });
 
-Meteor.Router.filter('requireVerification');
+Router.map(function() {
+
+  this.route('home', {
+    path: '/'
+  });
+
+  this.route('showsList', {
+    path: '/shows',
+    data: function() { return Shows.find({}, { sort: { name: 1 } }); }
+  });
+
+  this.route('showsAdd', { path: '/shows/add' });
+
+  this.route('showPage', {
+    path: '/shows/:_id',
+    data: function() { return Shows.findOne(this.params._id); },
+    onBeforeRun: function() { Session.set('selectedShowId', this.params._id); }
+  });
+
+  this.route('usersList', {
+    path: '/users',
+    data: function() { return Meteor.users.find(); }
+  });
+
+  this.route('notFound', { path: '/*' });
+
+});

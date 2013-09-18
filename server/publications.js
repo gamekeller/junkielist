@@ -1,5 +1,4 @@
 Meteor.publish('shows', function() {
-  this.ready();
   return Shows.find();
 });
 

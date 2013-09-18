@@ -35,7 +35,7 @@ Template.showItem.events = {
     e.preventDefault();
 
     if(!Meteor.user()) {
-      Meteor.Router.to('/');
+      Router.go('home');
       return false;
     }
 
@@ -86,11 +86,11 @@ Template.showItem.events = {
 
 Template.showItem.helpers({
   home: function() {
-    if(Meteor.Router.page() == 'home') return true;
+    if(Router.current().route.name == 'home') return true;
   },
 
   details: function() {
-    if(!isAdminById(Meteor.userId()) || Meteor.Router.page() == 'showPage') return true;
+    if(!isAdminById(Meteor.userId()) || Router.current().route.name == 'showPage') return true;
   },
 
   hasShow: function() {
@@ -100,7 +100,7 @@ Template.showItem.helpers({
   },
 
   onShowPage: function() {
-    return (Meteor.Router.page() == 'showPage') ? true : false;
+    return (Router.current().route.name == 'showPage') ? true : false;
   },
 
   seasonsArray: function() {
