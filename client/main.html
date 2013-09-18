@@ -1,13 +1,11 @@
-<head>
-  <title>Junkielist</title>
-</head>
+<template name="layout">
+  {{> nav}}
 
-<body>
-  {{> header}}
   <div class="container">
-    {{renderPage}}
+    {{yield}}
   </div>
+
   {{#if showSearchBar}}
     {{> searchBar}}
   {{/if}}
-</body>
+</template>

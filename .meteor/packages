@@ -13,6 +13,6 @@ jquery
 collection2
 autoform
 spin
-router
 accounts-base
 accounts-ui-custom
+iron-router

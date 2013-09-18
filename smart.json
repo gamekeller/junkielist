@@ -5,6 +5,6 @@
     "collection2": {},
     "autoform": {},
     "spin": {},
-    "router": {}
+    "iron-router": {}
   }
 }
