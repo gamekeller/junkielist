@@ -12,10 +12,8 @@ Router.configure({
   waitOn: function() {
     if(Meteor.user() && isAdminById(Meteor.userId())) {
       return [Subscriptions.shows, Subscriptions.currentUser, Subscriptions.allUsers];
-    } else if(Meteor.user() && Meteor.user().isVerified) {
-      return [Subscriptions.shows, Subscriptions.currentUser];
     } else {
-      return Subscriptions.currentUser;
+      return [Subscriptions.shows, Subscriptions.currentUser];
     }
   },
 
@@ -26,9 +24,6 @@ Router.configure({
 
     if(!Meteor.user()) {
       this.render(Meteor.loggingIn() ? this.loadingTemplate : 'welcome');
-      return this.stop();
-    } else if(!Meteor.user().isVerified) {
-      this.render(Meteor.loggingIn() ? this.loadingTemplate : 'requireVerification');
       return this.stop();
     } else if(_.contains(['usersList', 'showsAdd'], routeName) && !isAdminById(Meteor.userId())) {
       this.render(Meteor.loggingIn() ? this.loadingTemplate : 'notFound');
