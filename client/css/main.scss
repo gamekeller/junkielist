@@ -111,14 +111,14 @@ label small { font-weight: normal; }
 .container > .show-item:first-child { margin-top: 20px; }
 
 .stat select {
-  -webkit-appearance: none;
-  visibility: hidden;
   position: absolute;
   top: 0;
   left: 24px;
-  border: none;
   width: 59px;
   height: 44px;
+  opacity: 0;
+  cursor: context-menu;
+  border: none;
   font-size: 31px;
 }
 

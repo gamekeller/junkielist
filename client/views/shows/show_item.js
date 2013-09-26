@@ -41,21 +41,6 @@ Template.showItem.events = {
     Meteor.call('decreaseWatchedEpisode', showId);
   },
 
-  'click .has-select': function(e, instance) {
-    e.preventDefault();
-
-    var element = $(e.target).siblings('select')[0], worked = false;
-
-    if(document.createEvent) {
-      var event = document.createEvent("MouseEvents");
-      event.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-      worked = element.dispatchEvent(event);
-    } else if(element.fireEvent) {
-      worked = element.fireEvent("onmousedown");
-    }
-    if(!worked) alert("Dein Browser unterstützt die benötigten Funktionen nicht, bitte update deinen Browser!");
-  },
-
   'change select': function(e, instance) {
     e.preventDefault();
 

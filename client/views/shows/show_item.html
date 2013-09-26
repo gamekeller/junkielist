@@ -16,7 +16,7 @@
         <button type="button" class="episode-previous btn btn-default btn-kilo episode-pager"><span class="glyphicon glyphicon-chevron-left"></span></button>
         <ul class="stat-group">
           <li class="stat">
-            <div class="stat__value has-select">{{atSeason}}</div>
+            <div class="stat__value">{{atSeason}}</div>
             <select data-change="atSeason">
               {{#each seasonsArray}}
                 <option value="{{index}}" {{#if current}} selected {{/if}}>{{index}}</option>
@@ -25,7 +25,7 @@
             <div class="stat__title">Staffel</div>
           </li>
           <li class="stat">
-            <div class="stat__value has-select">{{atEpisode}}</div>
+            <div class="stat__value">{{atEpisode}}</div>
             <select data-change="atEpisode">
               {{#each episodesArray}}
                 <option value="{{index}}" {{#if current}} selected {{/if}}>{{index}}</option>
