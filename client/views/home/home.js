@@ -9,9 +9,3 @@ Template.home.shows = function() {
 Template.home.searchableName = function() {
   return this.name.toLowerCase();
 };
-
-Template.home.helpers({
-  hasShows: function() {
-    return !_.isEmpty(Meteor.user().shows);
-  }
-});

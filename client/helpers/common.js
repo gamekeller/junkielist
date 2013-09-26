@@ -46,3 +46,7 @@ Handlebars.registerHelper('showSearchBar', function() {
 Handlebars.registerHelper('isAdmin', function() {
   return isAdminById(Meteor.userId());
 });
+
+Handlebars.registerHelper('hasShows', function() {
+  return userHasShows();
+});

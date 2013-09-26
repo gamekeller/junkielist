@@ -50,15 +50,6 @@ Meteor.methods({
     }
   },
 
-  userHasShow: function(showId) {
-    if(!Meteor.user()) {
-      throw new Meteor.Error(401, 'Unauthorized');
-      return false;
-    }
-
-    return _.has(Meteor.user().shows, showId);
-  },
-
   increaseWatchedEpisode: function(showId) {
     if(!Meteor.user()) {
       throw new Meteor.Error(401, 'Unauthorized');

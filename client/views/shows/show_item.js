@@ -9,13 +9,10 @@ Template.showItem.events = {
 
     var showId = instance.data._id;
 
-    Meteor.call('userHasShow', showId, function(err, data) {
-      if(err) console.log(err);
-
-      (data)
-        ? Meteor.call('removeShowFromUser', showId)
-        : Meteor.call('addShowToUser', showId);
-    });
+    if(userHasShow(showId))
+      Meteor.call('removeShowFromUser', showId)
+    else
+      Meteor.call('addShowToUser', showId);
   },
 
   'click .episode-next': function(e, instance) {
@@ -94,9 +91,7 @@ Template.showItem.helpers({
   },
 
   hasShow: function() {
-    if(!Meteor.user()) return false;
-
-    return _.has(Meteor.user().shows, this._id);
+    return userHasShow(this._id);
   },
 
   onShowPage: function() {

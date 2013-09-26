@@ -22,6 +22,8 @@ Router.configure({
   before: function() {
     var routeName = this.context.route.name;
 
+    Session.set('showSearchBar', false);
+
     if(!Meteor.user()) {
       this.render(Meteor.loggingIn() ? this.loadingTemplate : 'welcome');
       return this.stop();
@@ -38,12 +40,14 @@ Router.configure({
 Router.map(function() {
 
   this.route('home', {
-    path: '/'
+    path: '/',
+    onAfterRun: function() { Session.set('showSearchBar', true); }
   });
 
   this.route('showsList', {
     path: '/shows',
-    data: function() { return Shows.find({}, { sort: { name: 1 } }); }
+    data: function() { return Shows.find({}, { sort: { name: 1 } }); },
+    onAfterRun: function() { Session.set('showSearchBar', true); }
   });
 
   this.route('showsAdd', { path: '/shows/add' });
