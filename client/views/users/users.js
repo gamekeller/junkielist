@@ -30,14 +30,6 @@ Template.usersList.userIsAdmin = function() {
 
 Template.usersList.events({
   'click .make-admin': function(e, template) {
-    Meteor.users.update({_id: this._id}, {$set: { isAdmin: true, isVerified: true }});
-  },
-
-  'click .verify': function(e, template) {
-    Meteor.users.update({_id: this._id}, {$set: { isVerified: true }});
-  },
-
-  'click .unverify': function(e, template) {
-    Meteor.users.update({_id: this._id}, {$set: { isVerified: false }});
+    Meteor.users.update({_id: this._id}, {$set: { isAdmin: true }});
   }
 });

@@ -6,9 +6,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>#</th>
+        <th>UID</th>
         <th>Name/E-Mail</th>
-        <th>Bestätigt</th>
         <th>Admin?</th>
         <th>Zum Admin machen</th>
       </tr>
@@ -18,16 +17,6 @@
         <tr data-search="{{namailSearchable}}">
           <td>{{_id}}</td>
           <td>{{namail}}</td>
-          <td>
-            {{isVerified}}
-            {{#unless userIsVerified}}
-              <button class="btn btn-primary btn-xs verify"><span class="glyphicon glyphicon-ok"></span></button>
-            {{else}}
-              {{#unless userIsAdmin}}
-                <button class="btn btn-danger btn-xs unverify"><span class="glyphicon glyphicon-remove"></span></button>
-              {{/unless}}
-            {{/unless}}
-          </td>
           <td>{{isAdmin}}</td>
           {{#unless userIsAdmin}}
             <td style="width: 14%;"><button class="btn btn-primary btn-block make-admin"><span class="glyphicon glyphicon-plus"></span></button></td>
