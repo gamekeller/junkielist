@@ -200,48 +200,48 @@
 
   Template._loginButtonsLoggedOutPasswordService.fields = function () {
     var loginFields = [
-      {fieldName: 'username-or-email', fieldLabel: 'Username or Email',
+      {fieldName: 'username-or-email', fieldLabel: 'Nutzername oder E-Mail',
        visible: function () {
          return _.contains(
            ["USERNAME_AND_EMAIL_CONFIRM", "USERNAME_AND_EMAIL", "USERNAME_AND_OPTIONAL_EMAIL"],
            Accounts.ui._passwordSignupFields());
        }},
-      {fieldName: 'username', fieldLabel: 'Username',
+      {fieldName: 'username', fieldLabel: 'Nutzername',
        visible: function () {
          return Accounts.ui._passwordSignupFields() === "USERNAME_ONLY";
        }},
-      {fieldName: 'email', fieldLabel: 'Email', inputType: 'email',
+      {fieldName: 'email', fieldLabel: 'E-Mail', inputType: 'email',
        visible: function () {
          return Accounts.ui._passwordSignupFields() === "EMAIL_ONLY";
        }},
-      {fieldName: 'password', fieldLabel: 'Password', inputType: 'password',
+      {fieldName: 'password', fieldLabel: 'Passwort', inputType: 'password',
        visible: function () {
          return true;
        }}
     ];
 
     var signupFields = [
-      {fieldName: 'username', fieldLabel: 'Username',
+      {fieldName: 'username', fieldLabel: 'Nutzername',
        visible: function () {
          return _.contains(
            ["USERNAME_AND_EMAIL_CONFIRM","USERNAME_AND_EMAIL", "USERNAME_AND_OPTIONAL_EMAIL", "USERNAME_ONLY"],
            Accounts.ui._passwordSignupFields());
        }},
-      {fieldName: 'email', fieldLabel: 'Email', inputType: 'email',
+      {fieldName: 'email', fieldLabel: 'E-Mail', inputType: 'email',
        visible: function () {
          return _.contains(
            ["USERNAME_AND_EMAIL_CONFIRM","USERNAME_AND_EMAIL", "EMAIL_ONLY"],
            Accounts.ui._passwordSignupFields());
        }},
-      {fieldName: 'email', fieldLabel: 'Email (optional)', inputType: 'email',
+      {fieldName: 'email', fieldLabel: 'E-Mail (optional)', inputType: 'email',
        visible: function () {
          return Accounts.ui._passwordSignupFields() === "USERNAME_AND_OPTIONAL_EMAIL";
        }},
-      {fieldName: 'password', fieldLabel: 'Password', inputType: 'password',
+      {fieldName: 'password', fieldLabel: 'Passwort', inputType: 'password',
        visible: function () {
          return true;
        }},
-      {fieldName: 'password-again', fieldLabel: 'Password (again)',
+      {fieldName: 'password-again', fieldLabel: 'Passwort (nochmals)',
        inputType: 'password',
        visible: function () {
          // No need to make users double-enter their password if

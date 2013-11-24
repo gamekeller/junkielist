@@ -1,0 +1,221 @@
+body {
+  background: #1a1a1a;
+  font-family: "Dosis", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.navbar {
+  background: none;
+  border: none;
+
+  .navbar-nav > .active > a {
+    &,
+    &:hover,
+    &:focus {
+      color: #fff;
+      background: none;
+    }
+  }
+
+  .navbar-nav > li > a,
+  .navbar-brand {
+    &:hover { color: #fff; }
+  }
+
+  .navbar-nav > li > a { color: rgba(255, 255, 255, 0.25); }
+
+  .navbar-brand {
+    color: #f90;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .navbar-nav > .dropdown > a .caret {
+    border-top-color: rgba(255, 255, 255, 0.25);
+    border-bottom-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .navbar-nav > .dropdown > a:hover .caret,
+  .navbar-nav > .open > a .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+  }
+}
+
+.brand-text {
+  color: #f90;
+  font-weight: 400;
+}
+
+.lead {
+  margin: 12px auto;
+  max-width: 60%;
+  text-align: center;
+  font-weight: 500;
+}
+
+.page-header {
+  border-bottom: 0;
+  margin: 48px 0 0;
+  padding: 24px 0;
+
+  hr {
+    margin: 48px auto;
+    border: 2px solid rgba(255, 255, 255, .05);
+    border-width: 2px 0;
+    max-width: 40%;
+  }
+
+  h1 {
+    font-size: 64px;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Dosis", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 200;
+}
+
+#login-dropdown-list .dropdown-toggle { border: none; }
+#login-dropdown-list.open .dropdown-toggle:after { display: none; }
+
+#login-dropdown-list.open .dropdown-toggle {
+  background-color: #f90;
+  color: #fff;
+}
+
+#login-dropdown-list .dropdown-menu {
+  border: none;
+  padding: 2px;
+  background: #f90;
+  border-radius: 5px 0 5px 5px;
+}
+
+#login-dropdown-inner {
+  background: #1a1a1a;
+  padding: 12px;
+  border-radius: 3px 0 3px 3px;
+}
+
+#login-dropdown-list .form-control {
+  box-shadow: none;
+  border: 1px solid #fff;
+  padding: 4px 10px;
+
+  &:focus { border-color: #f90; }
+}
+
+#login-dropdown-list .inputs > .form-control:focus {
+  z-index: initial;
+}
+
+#login-dropdown-list .inputs > input:first-child {
+  margin-right: 0;
+  border-right: 0;
+
+  &:focus + input { border-left-color: #f90; }
+}
+
+#login-dropdown-list .inputs > input:last-child { border-left-color: #e5e5e5; }
+#login-dropdown-list .inputs > input:last-child:focus { border-left-color: #f90; }
+
+#login-dropdown-list .or {
+  color: rgba(255, 255, 255, .25);
+
+  &:before { background: #303030; }
+}
+
+#login-dropdown-list .or .or-text { background: #1a1a1a; }
+
+#login-other-options {
+  width: 100%;
+}
+
+.btn-outline {
+  width: 50%;
+  padding: 5px 12px;
+  border: 1px solid #303030;
+  color: rgba(255, 255, 255, .25);
+  text-transform: uppercase;
+
+  &:hover {
+    color: #fff;
+    background: #f90;
+    border-color: #f90;
+  }
+
+  &:active {
+    background-color: #f28d00;
+    border-color: #d17a00;
+  }
+}
+
+.btn-primary {
+  background-color: #f90;
+  border: none;
+
+  &:hover,
+  &:focus,
+  &:active,
+  .active {
+    background-color: darken(#f90, 2.5%);
+  }
+}
+
+.show-item {
+
+  .media-object {
+    border-radius: 0;
+  }
+
+  .media {
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+  }
+}
+
+.show-item {
+  padding: 0;
+
+  &:nth-child(odd) { padding-right: 12px; }
+  &:nth-child(even) { padding-left: 12px; }
+
+  .media {
+    padding: 18px 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+
+    &:before {
+      content: "";
+      display: block;
+      @include position(absolute, 0 0 0px 0px);
+      @include size(100%);
+      @include linear-gradient(transparent, rgba(0, 0, 0, .75));
+    }
+  }
+
+  .stat-group { float: none; }
+
+  .middle {
+    position: relative;
+    width: 100%;
+    padding: 0 96px;
+    text-shadow: 0 0 15px #000;
+    text-align: center;
+    color: #fff;
+  }
+
+  h1 { font-weight: 400; }
+
+  .stat-group { margin: 0 auto; }
+
+  .stat {
+    border-right-color: rgba(255, 255, 255, .25);
+  }
+
+  .paginate {
+    z-index: 10;
+  }
+}

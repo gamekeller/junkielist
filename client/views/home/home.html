@@ -20,8 +20,61 @@
 </template>
 
 <template name="welcome">
-  <div class="jumbotron">
-    <h1>Willkommen bei Junkielist</h1>
-    <p>Bitte melde dich an, um zu starten</p>
+  <div class="page-header">
+    <h1>Sag Hallo zu deiner <span class="brand-text">Junkielist</span></h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, dignissimos, quis, placeat consequuntur ullam quibusdam a rerum unde doloribus numquam ipsa illum! Rerum amet nulla provident possimus voluptatem qui est?</p>
   </div>
+
+  <ul class="show-list multi-list two-cols clearfix">
+    <li class="show-item alt" data-search="test">
+      <div class="media" style="background-image: url(/img/thementalist.png); background-position: top center;">
+        <button type="button" class="paginate left" data-state="disabled"><i></i><i></i></button>
+        <div class="middle">
+          <h1 class="media-heading kilo" title="The Mentalist">The Mentalist</h1>
+          <ul class="stat-group">
+            <li class="stat">
+              <div class="stat__value">1</div>
+              <select data-change="atSeason">
+                <option value="1" selected>1</option>
+              </select>
+              <div class="stat__title">Staffel</div>
+            </li>
+            <li class="stat">
+              <div class="stat__value">1</div>
+              <select data-change="atEpisode">
+                <option value="1" selected>1</option>
+              </select>
+              <div class="stat__title">Episode</div>
+            </li>
+          </ul>
+        </div>
+        <button type="button" class="paginate right"><i></i><i></i></button>
+      </div>
+    </li>
+    <li class="show-item alt" data-search="test">
+      <div class="media" style="background-image: url(/img/criminalminds.png); background-position: top center;">
+        <button type="button" class="paginate left" data-state="disabled"><i></i><i></i></button>
+        <div class="middle">
+          <h1 class="media-heading kilo" title="Criminal Minds">Criminal Minds</h1>
+          <ul class="stat-group">
+            <li class="stat">
+              <div class="stat__value">1</div>
+              <select data-change="atSeason">
+                <option value="1" selected>1</option>
+              </select>
+              <div class="stat__title">Staffel</div>
+            </li>
+            <li class="stat">
+              <div class="stat__value">1</div>
+              <select data-change="atEpisode">
+                <option value="1" selected>1</option>
+              </select>
+              <div class="stat__title">Episode</div>
+            </li>
+          </ul>
+        </div>
+        <button type="button" class="paginate right"><i></i><i></i></button>
+      </div>
+    </li>
+  </ul>
 </template>
