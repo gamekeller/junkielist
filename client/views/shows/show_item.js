@@ -1,9 +1,9 @@
 Template.showItem.events = {
-  'click .btn-ultra': function(e, instance) {
+  'click [data-trigger="toggleShow"]': function(e, instance) {
     e.preventDefault();
 
     if(!Meteor.user()) {
-      Meteor.Router.to('/');
+      Router.go('home');
       return false;
     }
 
@@ -15,11 +15,25 @@ Template.showItem.events = {
       Meteor.call('addShowToUser', showId);
   },
 
+  'click [data-trigger="deletion"]': function(e, instance) {
+    e.preventDefault();
+
+    if(!isAdminById(Meteor.userId())) {
+      Router.go('home');
+      return false;
+    }
+
+    if(confirm('Möchtest du die Serie ' + instance.data.name + ' wirklich aus der Datenbank löschen? Dieser Prozess kann nicht rückgängig gemacht werden!')) {
+      Meteor.call('removeShow', instance.data._id);
+      Router.go('showsList');
+    }
+  },
+
   'click .episode-next': function(e, instance) {
     e.preventDefault();
 
     if(!Meteor.user()) {
-      Meteor.Router.to('/');
+      Router.go('home');
       return false;
     }
 
@@ -69,6 +83,10 @@ Template.showItem.events = {
 Template.showItem.helpers({
   home: function() {
     if(Router.current().route.name == 'home') return true;
+  },
+
+  showPage: function() {
+    if(Router.current().route.name == 'showPage') return true;
   },
 
   details: function() {

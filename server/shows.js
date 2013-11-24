@@ -28,13 +28,15 @@ Meteor.methods({
     }
   },
 
-  removeShowFromUser: function(showId) {
-    if(!Meteor.user()) {
+  removeShowFromUser: function(showId, userId) {
+    var user = (userId) ? Meteor.users.findOne(userId) : Meteor.user()
+
+    if(!user) {
       throw new Meteor.Error(401, 'Unauthorized');
       return false;
     }
 
-    var shows = Meteor.user().shows;
+    var shows = user.shows;
 
     if(_.has(shows, showId)) {
 
@@ -105,5 +107,19 @@ Meteor.methods({
     }
 
     Meteor.users.update({ _id: Meteor.userId() }, { $set: update });
+  },
+
+  removeShow: function(showId) {
+    if(!isAdminById(Meteor.userId())) {
+      throw new Meteor.Error(401, 'Unauthorized');
+      return false;
+    }
+
+    Meteor.users.find().forEach(function(user) {
+      if(_.has(user.shows, showId))
+        Meteor.call('removeShowFromUser', showId, user._id)
+    })
+
+    Shows.remove(showId);
   }
 });

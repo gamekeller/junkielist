@@ -4,10 +4,12 @@
 
     {{#unless showPage}}
       {{#if hasShow}}
-        <button type="button" class="btn btn-ultra btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+        <button type="button" class="btn btn-ultra btn-danger" data-trigger="toggleShow"><span class="glyphicon glyphicon-remove"></span></button>
       {{else}}
-        <button type="button" class="btn btn-ultra btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+        <button type="button" class="btn btn-ultra btn-primary" data-trigger="toggleShow"><span class="glyphicon glyphicon-plus"></span></button>
       {{/if}}
+    {{else}}
+      <button type="button" class="btn btn-ultra btn-danger" data-trigger="deletion"><span class="glyphicon glyphicon-remove"></span></button>
     {{/unless}}
 
     <div class="media-body">

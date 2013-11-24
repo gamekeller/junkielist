@@ -63,7 +63,7 @@ Shows.callbacks({
     if (error)
       console.log("Insert Error:", error);
     else
-      Meteor.Router.to('/shows/' + result);
+      Router.go('/shows/' + result);
   },
   update: function(error, doc) {
     if (error) {
@@ -74,6 +74,6 @@ Shows.callbacks({
     if(error)
       console.log("Remove Error:", error);
     else
-      Meteor.Router.to('/');
+      Router.go('home');
   }
 });
